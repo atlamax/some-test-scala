@@ -18,6 +18,15 @@ version "1.0.0-SNAPSHOT"
 
 sourceCompatibility = 1.8
 
+mainClassName = "com.mobcrush.ums.UMSServerMain"
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.mobcrush.ums.UMSServerMain',
+                'Implementation-Title': 'UMS Server'
+    }
+}
+
 shadowJar {
     baseName = 'ums-simplified'
     classifier = null
