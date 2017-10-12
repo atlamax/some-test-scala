@@ -1,5 +1,6 @@
 package com.mobcrush.ums
 
+import com.mobcrush.ums.service.SocialProviderService
 import org.slf4j.{Logger, LoggerFactory}
 
 /**
@@ -24,7 +25,7 @@ object UMSServerMain {
       return
     }
 
-    args.foreach(println(_))
+    SocialProviderService.getMessages(providerName.get, accessToken.get)
   }
 
   def parseParameters(args: Array[String]): Boolean = {
@@ -37,7 +38,7 @@ object UMSServerMain {
           case STREAM_ID_PARAM_NAME => streamId = Some(parametersArray(1))
           case PROVIDER_PARAM_NAME => providerName = Some(parametersArray(1))
           case TOKEN_PARAM_NAME => accessToken = Some(parametersArray(1))
-          case _ => LOGGER.warn("Unknown parameter: {}", parametersArray(0))
+          case _ => ConfigurationHolder.addConfiguration(parametersArray(0), parametersArray(1))
         }
       } else {
         LOGGER.warn("Parameters key and value must be delimited by symbol '=': {}", arg)
